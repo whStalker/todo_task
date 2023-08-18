@@ -11,7 +11,8 @@ class TodoDB {
         "eventName" TEXT NOT NULL,
         "eventDescription" TEXT NOT NULL,
         "eventLocation" TEXT,
-        "priorityColor" TEXT NOT NULL,
+        "priorityTaskColor" INTEGER NOT NULL,
+        "prioritySecondColor" INTEGER NOT NULL,
         "eventTime" TEXT NOT NULL,
 
         PRIMARY KEY("id" AUTOINCREMENT)
@@ -21,15 +22,17 @@ class TodoDB {
   Future<int> createEvent(TodoModel todoModel) async {
     final database = await DatabaseService().database;
     return await database.rawInsert(
-        '''INSERT INTO $tableName (eventName, eventDescription, eventLocation, priorityColor, eventTime)
-        VALUES (?,?,?,?,?)''',
-        [
-          todoModel.eventName,
-          todoModel.eventDescription,
-          todoModel.eventLocation,
-          todoModel.priorityColor,
-          todoModel.eventTime,
-        ]);
+      '''INSERT INTO $tableName (eventName, eventDescription, eventLocation, priorityTaskColor, prioritySecondColor, eventTime)
+        VALUES (?,?,?,?,?,?)''',
+      [
+        todoModel.eventName,
+        todoModel.eventDescription,
+        todoModel.eventLocation,
+        todoModel.priorityTaskColor,
+        todoModel.prioritySecondColor,
+        todoModel.eventTime,
+      ],
+    );
   }
 
   Future<List<TodoModel>> getAllEvent() async {

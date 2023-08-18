@@ -3,14 +3,16 @@ class TodoModel {
   String eventName;
   String eventDescription;
   String eventLocation;
-  String priorityColor;
+  int priorityTaskColor;
+  int prioritySecondColor;
   String eventTime;
 
   TodoModel({
     this.id,
     required this.eventName,
     required this.eventDescription,
-    required this.priorityColor,
+    required this.priorityTaskColor,
+    required this.prioritySecondColor,
     required this.eventTime,
     required this.eventLocation,
   });
@@ -20,7 +22,8 @@ class TodoModel {
         eventName: map['eventName'] ?? '',
         eventDescription: map['eventDescription'] ?? '',
         eventLocation: map['eventLocation'] ?? '',
-        priorityColor: map['priorityColor'] ?? '',
+        priorityTaskColor: map['priorityTaskColor'] ?? 0,
+        prioritySecondColor: map['prioritySecondColor'] ?? 0,
         eventTime: map['eventTime'] ?? '',
       );
 
@@ -29,7 +32,8 @@ class TodoModel {
         'eventName': eventName,
         'eventDescription': eventDescription,
         'eventLocation': eventLocation,
-        'priorityColor': priorityColor,
+        'priorityTaskColor': priorityTaskColor,
+        'prioritySecondColor': prioritySecondColor,
         'eventTime': eventTime,
       };
 }

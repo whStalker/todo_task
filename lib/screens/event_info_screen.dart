@@ -111,7 +111,7 @@ class EventInfoScreen extends StatelessWidget {
                           Icons.watch_later_rounded,
                           color: Colors.white,
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Text(
                           todos.eventTime,
                           style: const TextStyle(
@@ -149,8 +149,8 @@ class EventInfoScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Reinder',
+                  const Text(
+                    'Remainder',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -161,7 +161,7 @@ class EventInfoScreen extends StatelessWidget {
                   const SizedBox(height: 15),
                   const Text(
                     'Description',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),

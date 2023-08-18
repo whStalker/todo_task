@@ -9,11 +9,39 @@ class EventAddScren extends StatefulWidget {
   State<EventAddScren> createState() => _EventAddScrenState();
 }
 
+List<int> priorityColorList = [
+  0xFFC6E6F6, // low priority color - blue
+  0xFFF6E3C6, // medium priority color  - yellow
+  0xFFF6CFC6, // high priority color  - red
+];
+
+List<int> secondColorValue = [
+  0xFF009FEE, // low priority color
+  0xFFEE8F00, // medium priority color
+  0xFFEE2B00, // high priority color
+];
+
+// List<Color> priorityColorList = [
+//   const Color(0xFFC6E6F6),
+//   const Color(0xFFF6CFC6),
+//   const Color(0xFFF6E3C6),
+// ];
+
+int dropdownValueColor = priorityColorList.first;
+
 class _EventAddScrenState extends State<EventAddScren> {
   TextEditingController eventNameController = TextEditingController();
   TextEditingController eventDescriptionController = TextEditingController();
   TextEditingController eventLocationController = TextEditingController();
   TextEditingController eventTimeController = TextEditingController();
+
+  int selectedColorIndex = 0;
+
+  void changeColor(color) {
+    setState(() {
+      selectedColorIndex = priorityColorList.indexOf(color);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +130,7 @@ class _EventAddScrenState extends State<EventAddScren> {
               const SizedBox(height: 20),
 
               // Event priority color enter
+
               const Text(
                 'Priority color',
                 style: TextStyle(
@@ -109,10 +138,33 @@ class _EventAddScrenState extends State<EventAddScren> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              DropdownMenu(
-                dropdownMenuEntries: [],
+
+              DropdownButton<int>(
+                value: priorityColorList[selectedColorIndex],
+                onChanged: (colorValue) {
+                  changeColor(colorValue);
+
+                  debugPrint('index: ${selectedColorIndex}');
+
+                  // setState(() {
+                  //   dropdownValueColor = colorValue!;
+
+                  //   debugPrint('color is : ${colorValue}');
+                  // });
+                },
+                items: priorityColorList.map<DropdownMenuItem<int>>(
+                  (value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Container(
+                        height: 30,
+                        width: 40,
+                        color: Color(value),
+                      ),
+                    );
+                  },
+                ).toList(),
               ),
-              DropdownButton(items: [], onChanged: (_) {}),
               const SizedBox(height: 20),
 
               // Event time enter area
@@ -150,7 +202,8 @@ class _EventAddScrenState extends State<EventAddScren> {
               TodoModel(
                 eventName: eventNameController.text,
                 eventDescription: eventDescriptionController.text,
-                priorityColor: 'color',
+                priorityTaskColor: priorityColorList[selectedColorIndex],
+                prioritySecondColor: secondColorValue[selectedColorIndex],
                 eventTime: eventTimeController.text,
                 eventLocation: eventLocationController.text,
               ),

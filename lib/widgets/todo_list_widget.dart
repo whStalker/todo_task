@@ -10,6 +10,7 @@ class TodoListWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: todos.length,
       itemBuilder: (context, index) {
+        final data = todos[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           child: GestureDetector(
@@ -19,12 +20,13 @@ class TodoListWidget extends StatelessWidget {
                 'event_info_screen',
                 arguments: todos[index],
               );
-              debugPrint('${todos[index].runtimeType}');
             },
             child: Container(
               height: 120,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Color(
+                  data.priorityTaskColor,
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -32,8 +34,10 @@ class TodoListWidget extends StatelessWidget {
                   Container(
                     height: 10,
                     decoration: BoxDecoration(
-                      color: Color(0xff009FEE),
-                      borderRadius: BorderRadius.only(
+                      color: Color(
+                        data.prioritySecondColor,
+                      ),
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
@@ -47,39 +51,39 @@ class TodoListWidget extends StatelessWidget {
                       children: [
                         // Event name
                         Text(
-                          todos[index].eventName,
-                          style: const TextStyle(
+                          data.eventName,
+                          style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF056EA1),
+                            color: Color(data.prioritySecondColor),
                           ),
                         ),
                         const SizedBox(height: 7),
 
                         //Event description
-                        Text(todos[index].eventDescription),
+                        Text(data.eventDescription),
                         const SizedBox(height: 10),
 
                         // Event time and location ROW
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.watch_later_rounded,
-                              color: Color(0xffbac056EA1),
+                              color: Color(data.prioritySecondColor),
                             ),
                             Text(
-                              todos[index].eventTime,
+                              data.eventTime,
                               style: const TextStyle(
                                 fontSize: 16,
                               ),
                             ),
                             const SizedBox(width: 10),
-                            const Icon(
+                            Icon(
                               Icons.location_on,
-                              color: Color(0xFFbac056EA1),
+                              color: Color(data.prioritySecondColor),
                             ),
                             Text(
-                              todos[index].eventLocation,
+                              data.eventLocation,
                               style: const TextStyle(
                                 fontSize: 16,
                               ),

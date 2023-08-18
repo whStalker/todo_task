@@ -42,7 +42,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             ),
             itemBuilder: (contex, index) {
               return Container(
-                // color: Colors.grey,
                 child: Center(
                   child: Text(DateFormat('E')
                       .format(getDaysInMonth(dateTime)[index])
